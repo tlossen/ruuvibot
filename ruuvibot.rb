@@ -41,14 +41,14 @@ while true do
         # store temperature in influxdb
         queue.enqueue_b do 
           temperature = temperature(data)
-          log "#{ruuvi/#{sensor}/temperature}: #{temperature}"
+          log "ruuvi/#{sensor}/temperature: #{temperature}"
           system "curl -XPOST '#{INFLUX_URL}' --data-binary 'ruuvi/#{sensor}/temperature value=#{temperature}'"
         end
 
         # store humidity in influxdb
         queue.enqueue_b do 
           humidity = humidity(data)
-          log "#{ruuvi/#{sensor}/humidity}: #{humidity}"
+          log "ruuvi/#{sensor}/humidity: #{humidity}"
           system "curl -XPOST '#{INFLUX_URL}' --data-binary 'ruuvi/#{sensor}/humidity value=#{humidity}'"
         end
       end
